@@ -1,14 +1,14 @@
 param
 (
-    [Parameter(Mandatory=$false)][string]$inputSarifFile = "d:\dev\Handyman\scripts\semmle\original.sarif",
-    [Parameter(Mandatory=$false)][string]$localSourceLocation = "d:\dev\handyman\"
+    [Parameter(Mandatory=$false)][string]$inputSarifFile = "d:\dev\Sample\scripts\semmle\original.sarif",
+    [Parameter(Mandatory=$false)][string]$localSourceLocation = "d:\dev\Sample\"
 )
 
 # Install Sarif tool
 dotnet tool install --global Sarif.Multitool --version 2.1.24
 
 # Setting up first before calling sarif tool
-$currentDirectory = Get-Location;
+$currentDirectory = [System.IO.Path]::GetDirectoryName($inputSarifFile)
 $readySarifFile = "$currentDirectory\ready.sarif"
 Copy-Item $inputSarifFile $readySarifFile
 
